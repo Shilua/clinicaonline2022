@@ -1,0 +1,8 @@
+cambios sprint 1
+para el login arriba 6 botones de acceso rapido 3 pacientes 2 especialistas 1 admin
+rectangulares y con la imagen del perfil sin texto
+
+registro de usuarios
+al registrar se van a ver dos imagenes, botones rectangulares, un especialista o un paciente 
+cuando se presione muestra el form de el que corresponde
+
