@@ -1,0 +1,107 @@
+<div class="row justify-content-center" style="padding-top: 150px;">
+    <div class="col-md-3 offset-md-2" >
+      <div class="col-4">
+        <img class="mb-4" src="../../../assets/fever-g399928f28_640.png" alt="" width="250" height="250" (click)="paciente()">
+        <h3>Paciente</h3>
+      </div>
+      <div class="col-4">
+        <img class="mb-4" src="../../../assets/doctor-ge7cc28a68_640.png" alt="" width="250" height="250" (click)="especialista()">
+        <h3>Especialista</h3>
+      </div>
+    </div>
+    <div class="col-md-4 " >
+      <h4>Seleccione un perfil para ver el formulario</h4>
+      <form [formGroup]="formRegister"  *ngIf="user.profile">
+      <div>
+        <div class="form-group">
+            <label for="firstName">Nombre</label>
+            <input [(ngModel)]="user.fistName" 
+            placeholder="ingrese nombre" type="Text" 
+            class="form-control" id="firstName"
+            formControlName="firstName"
+            />
+        </div>
+        <div class="form-group">
+            <label for="lastName">Apellido</label>
+            <input [(ngModel)]="user.lastName" 
+            placeholder="ingrese apelldo" type="Text" 
+            class="form-control" id="lastName"
+            formControlName="lastName"
+            />
+        </div>
+        <div class="form-group">
+            <label for="DNI">DNI</label>
+            <input [(ngModel)]="user.dni"  
+            type="Number" class="form-control" id="DNI"
+            formControlName="dni"/>
+        </div>
+        <div class="form-group">
+          <label for="Edad">Edad</label>
+          <input [(ngModel)]="user.age"  
+          type="Number" class="form-control" id="Edad"
+          formControlName="age"/>
+      </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input [(ngModel)]="user.email" 
+            placeholder="ingrese Email" type="email" 
+            class="form-control" id="email"
+            formControlName="email"
+            />
+        </div>
+        <div class="form-group">
+          <label for="pass">Password</label>
+          <input [(ngModel)]="user.password" 
+            placeholder="ingrese clave" type="password" 
+            class="form-control" id="pass"
+            formControlName="password"
+            />
+        </div>
+        
+        <div *ngIf="this.user.profile == 'Especialista'">
+          <div class="form-group">
+            <label for="Especialidad">Especialidad</label>
+            <input type="text" class="form-control" id="Especialidad" [(ngModel)]="this.especiality" formControlName="speciality"/>
+            <button class="btn btn-block btn-outline-primary" (click)="saveEspeciality()">cargar</button>
+          </div>
+          <div class="form-group" >
+            <label for="imgOne">Foto de perfil</label>
+            <input type="file" class="form-control" 
+            [(ngModel)]="imgOneUrl" (change)="handleFirstImg($event)" id="imgOne"
+            formControlName="imageOne"
+            />
+            <h6>Especialidades cargadas</h6>
+            <div *ngFor="let item of this.user.speciality">
+              <p>{{item}}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="this.user.profile == 'Paciente'">
+        <div class="form-group">
+            <label for="obraSocial">Obra Social</label>
+            <input [(ngModel)]="user.obraSocial" placeholder="ingrese Obra Social" type="Text" class="form-control" id="obraSocial"
+            formControlName="obraSocial"
+            />
+        </div>
+          <div class="form-group" >
+            <label for="imgOne">Foto de perfil</label>
+            <input type="file" class="form-control" [(ngModel)]="imgOneUrl" (change)="handleFirstImg($event)" id="imgOne"
+            formControlName="imageOne"
+            />
+          </div>
+          <div class="form-group">
+            <label for="imgTwo">Foto de perfil dos</label>
+          <input type="file" class="form-control" [(ngModel)]="imgTwoUrl" (change)="handleSecondImg($event)" id="imgTwo"
+          formControlName="imageTwo"
+          />
+          </div>
+        </div>
+        
+        <button class="btn btn-block btn-primary" [disabled]="formRegister.invalid" (click)="onRegister()">Registrarse</button>
+        <button class="btn btn-block btn-outline-primary" type="submit" (click)="login()">Conectarse</button>
+      </div>
+      </form>
+      
+    </div>
+    </div>
+  
