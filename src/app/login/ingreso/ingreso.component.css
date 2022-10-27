@@ -1,0 +1,35 @@
+.blur{
+    filter: grayscale(0.5) blur(10px);
+}
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -25px;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    font-size: 10px;
+    z-index: 2000;
+    
+  }
+
+  .button{
+    display: block;
+ border: solid white;
+ border-width: 0 10px;
+ border-radius: 0;
+ background: blue;
+ color: white;
+ font-size: 18px;
+ margin: -60px auto 15px;
+ padding: 15px;
+ width: 300px;
+ height: 100px;
+  }
+
+  .img{
+    width: 70px;
+    height: 70px;
+  }

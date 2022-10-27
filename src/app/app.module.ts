@@ -12,10 +12,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
+import { WellcomeComponent } from './components/wellcome/wellcome.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WellcomeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,41 @@
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+<div class="spinner"  *ngIf="spinner == true"><img src="../../../assets/spinner.gif" alt="" srcset=""></div>
+<div class="row" style="padding-top: 150px;">
+    <div class="col-md-12" *ngFor="let userBtn of users" >
+      <button type="button" class="button btn-primary" (click)="loginWithUser(userBtn.email, userBtn.password)"> 
+        <img src="{{userBtn.profileImgOne}}" alt="" srcset="" class="img">
+      </button>
+      <br>
+    </div>
+    <div class="col-md-12 text-center form-signin"  >
+        <form>
+            <h1 class="h3 mb-3 fw-normal">Por favor conectese</h1>
+        
+            <div class="form-floating">
+              <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com"  >
+              <label for="floatingInput">Correo electronico</label>
+            </div>
+            <div class="form-floating">
+              <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" >
+              <label for="floatingPassword">Contraseña</label>
+            </div>
+            <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" value="remember-me" disabled> Recuerdame
+              </label>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="login()">Conectarse</button>    
+                </div>
+                <div class="col-md-6">
+                    <button class="w-100 btn btn-lg btn-outline-primary" type="submit" (click)="register()">Registrarse</button>    
+                </div>
+            </div>
+            
+          </form>
+    </div>
+  </div>
+  
+  
+   
