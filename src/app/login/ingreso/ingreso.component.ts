@@ -14,7 +14,7 @@ export class IngresoComponent implements OnInit, OnDestroy  {
 
   user:User = new User();
   
-  spinner:Boolean = true;
+  spinner:Boolean = false;
   imgs:any = new Map();
   users:Array<User> = new Array<User>();
   
@@ -54,7 +54,7 @@ export class IngresoComponent implements OnInit, OnDestroy  {
      }
   spinnerTime(){
     console.log('here')
-    this.spinner = false
+    this.spinner = true
     console.log(this.spinner)
   }
   ngOnInit(): void {

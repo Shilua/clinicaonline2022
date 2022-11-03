@@ -14,6 +14,7 @@ export class User {
     public profileImgTwo:any;
     public imageOne:string = ''
     public imageTwo:string = ''
+
     constructor(){
 
     }

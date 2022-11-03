@@ -13,11 +13,13 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { WellcomeComponent } from './components/wellcome/wellcome.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WellcomeComponent
+    WellcomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

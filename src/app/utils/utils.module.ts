@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 
 @NgModule({
   declarations: [
-    ToastContainerComponent
+    ToastContainerComponent,
+    NavBarComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule
   ],
   exports : [
-    ToastContainerComponent
+    ToastContainerComponent,
+    NavBarComponent
   ]
 })
 export class UtilsModule { }

@@ -1,10 +1,11 @@
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
-<div class="spinner"  *ngIf="spinner == true"><img src="../../../assets/spinner.gif" alt="" srcset=""></div>
+<!--div class="spinner"  [hidden] = 'spinner'><img src="../../../assets/spinner.gif" alt="" srcset=""></div-->
 <div class="row" style="padding-top: 150px;">
     <div class="col-md-12" *ngFor="let userBtn of users" >
       <button type="button" class="button btn-primary" (click)="loginWithUser(userBtn.email, userBtn.password)"> 
         <img src="{{userBtn.profileImgOne}}" alt="" srcset="" class="img">
       </button>
+      <br>
       <br>
     </div>
     <div class="col-md-12 text-center form-signin"  >

@@ -69,7 +69,7 @@ export class UserService {
       let fileRef = this.fireStorage.storage.ref(`profileImg/${randomId}.jpg`);
       fileRef.put(file);
     }
-    if (user.profile == "Paciente") {
+    if (user.profile == "Paciente" || user.profile == 'Administrador') {
       user.isActive = true;
     }else{
       user.isActive = false;

@@ -1,0 +1,36 @@
+
+<table class="table table-info table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>DNI.</th>
+            <th>Mail</th>
+            <th>Imagen de pefil</th>
+            <th>Acciones</th>
+        </tr>
+        
+
+    </thead>
+    <tbody >
+        <tr *ngFor="let usuario of usuarios">
+            <td>{{usuario.fistName}}</td>
+            <td>{{usuario.lastName}}</td>
+            <td>{{usuario.age}}</td>
+            <td>{{usuario.dni}}</td>
+            <td>{{usuario.email}}</td>
+            <td>
+                <img src="{{usuario.imageOne}}" alt="" srcset="" style="height: 100px;">
+            </td>
+            <td *ngIf="usuario.profile == 'Especialista'; else paciente">
+                <button class="btn btn-primary"> button</button>
+            </td>
+            <ng-template #paciente>
+                <td></td>
+            </ng-template>
+
+        </tr>
+        
+    </tbody>
+</table>
