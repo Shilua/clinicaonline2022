@@ -1,27 +1,16 @@
-# Clinica
+# clinica Online
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+Clinica online de autogestion de turnos, como cliente podra gestionar sus turnos, dar de alta nuevos y cancelar los existentes,
+como especialista podra ver los turnos que tiene asignado
 
-## Development server
+# registro
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+en el registro se podra dar de alta, elija entre especialista y paciente, complete los datos y recibira un correo electronico para confirmar su identidad
 
-## Code scaffolding
+![registro](readme-assets/registro.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# conectarse
 
-## Build
+podra conectarse a la plataforma con su usuario y contraseña para poder gestionar sus turnos
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![conectarse](readme-assets/conectarse.png)
