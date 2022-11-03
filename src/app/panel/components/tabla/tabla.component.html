@@ -23,11 +23,11 @@
             <td>
                 <img src="{{usuario.imageOne}}" alt="" srcset="" style="height: 100px;">
             </td>
-            <td *ngIf="usuario.profile == 'Especialista'; else paciente">
-                <button class="btn btn-primary"> button</button>
+            <td *ngIf="usuario.profile == 'Especialista' && usuario.isActive == false; else paciente">
+                <button class="btn btn-primary" (click)="activar(usuario)"> Activar</button>
             </td>
             <ng-template #paciente>
-                <td></td>
+                <td>no hay acciones</td>
             </ng-template>
 
         </tr>

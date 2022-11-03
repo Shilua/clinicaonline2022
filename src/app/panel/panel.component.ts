@@ -34,6 +34,7 @@ export class PanelComponent implements OnInit {
             user.password = data.password;
             user.profile = data.profile;
             user.profileImgOne = data.profileImgOne;
+            user.isActive = data.isActive;
             this.userSrv.getProfilePhoto(data.profileImgOne).then(
               img => {
                 user.imageOne = img;

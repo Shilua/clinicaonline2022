@@ -4,7 +4,7 @@ import { HomeComponent } from '../components/home/home.component';
 import { PanelComponent } from './panel.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: PanelComponent },
   { path: 'admin', component: PanelComponent },
   
 ];

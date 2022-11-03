@@ -4,7 +4,7 @@ import { AuthService } from "../../services/auth.service";
 import { UserService } from "../../services/user.service";
 import { User } from '../../classes/user';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +27,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authSvc:AuthService, 
     private userSvc:UserService,
-    private router: Router
+    private router: Router,
+    private toastService:ToastService
     ) {
       this.token = undefined
       this.formRegister = new FormGroup({
@@ -55,7 +56,11 @@ export class RegisterComponent implements OnInit {
       );
       this.authSvc.getCurrentUser().then((u:any) => u.sendEmailVerification()).then(
         () => {
-          console.log('send correo');
+          this.toastService.show(
+            'Se ha registrado correctamente, se le envio un correo electronico para verificarlo,' 
+            + 'si es Especialista debe esperar que lo autorice un administrador', 
+            {classname : 'bg-success text-light', delay:3000}
+          )
         }
       );
       //this.router.navigate(['/principal']);

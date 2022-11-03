@@ -73,7 +73,10 @@ export class IngresoComponent implements OnInit, OnDestroy  {
                 let data = element.data();
                 console.log(data);
                 if (data.profile == 'Especialista' && !data.isActive) {
-                  alert('Su usuario no esta activado')
+                  this.toastService.show(
+                    'Su usuario no esta activado', 
+                    {classname : 'bg-danger text-light', delay:3000}
+                  )
                   return
                 }
                 
@@ -111,7 +114,10 @@ export class IngresoComponent implements OnInit, OnDestroy  {
           ) 
           
         }else{
-          alert('falta verificar')
+          this.toastService.show(
+            'falta verificar su usuario', 
+            {classname : 'bg-danger text-light', delay:3000}
+          )
         }
       }
     )
