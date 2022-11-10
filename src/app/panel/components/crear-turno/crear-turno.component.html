@@ -1,6 +1,7 @@
-<div class="col-md-12" *ngFor="let especialidad of especialidades" >
+<div class="text-center">
+  <div class="col-md-12" *ngFor="let especialidad of especialidades" >
     <button type="button" class="btn btn-primary" (click)="seleccionarEspecialidad(especialidad)"> 
-      <img src="{{especialidad}}.jpg" alt="" srcset="" class="img">
+      <img src="../../../../assets/{{especialidad}}.jpg" alt="" srcset="" class="img" style="height: 100px;">
     </button>
     <br>
     {{especialidad}}
@@ -21,4 +22,5 @@
 </div>
 <div class="col-md-12" *ngFor="let horario of horarios" ><br>
   <button type="button" class="btn btn-primary">{{horario }}</button>
+</div>
 </div>
