@@ -27,7 +27,7 @@ export class IngresoComponent implements OnInit, OnDestroy  {
       setTimeout(this.spinnerTime, 2000)
       this.userServ.getElements().where('email','in' ,
       [
-        'maximilanomvargas@gmail.com', 
+        'tkpejhhxrqlflvnwhx@tmmcv.com', 
         'wjuqnuoltjqioewjjg@tmmwj.com',
         'yahqdwqtdkdnshsnsd@tmmwj.net',
         'djfcksitoyvypjieak@tmmcv.net',

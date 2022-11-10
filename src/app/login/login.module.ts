@@ -21,6 +21,9 @@ import { IngresoComponent } from './ingreso/ingreso.component';
     ReactiveFormsModule,
     LoginRoutingModule,
     UtilsModule
+  ],
+  exports: [
+    RegisterComponent
   ]
 })
 export class LoginModule { }

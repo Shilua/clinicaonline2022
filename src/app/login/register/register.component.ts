@@ -5,6 +5,8 @@ import { UserService } from "../../services/user.service";
 import { User } from '../../classes/user';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastService } from 'src/app/services/toast.service';
+import { EspecialidadesService } from 'src/app/services/especialidades.service';
+import { Especialidad } from 'src/app/classes/especialidad';
 
 @Component({
   selector: 'app-register',
@@ -22,14 +24,25 @@ export class RegisterComponent implements OnInit {
   imageTwo:any;
   token: string|undefined;
   formRegister : FormGroup;
-
+  profile:String = '';
+  especialidades:Array<string> = new Array<string>();
 
   constructor(
     private authSvc:AuthService, 
     private userSvc:UserService,
     private router: Router,
-    private toastService:ToastService
+    private toastService:ToastService,
+    private specialitySvc:EspecialidadesService
     ) {
+      this.specialitySvc.getElements().where('isDelete', '==', false).get().then(
+        snapshot => {
+          snapshot.docs.map((element:any)=>{
+            this.especialidades.push(element.data().especialidad);
+            
+          })
+        }
+      )
+      this.profile = this.authSvc.anUser.profile;
       this.token = undefined
       this.formRegister = new FormGroup({
         firstName: new FormControl('',[Validators.required]),
@@ -48,7 +61,15 @@ export class RegisterComponent implements OnInit {
 
   async onRegister(){
     this.authSvc.onRegister(this.user).then(response => {
-
+      if (this.user.profile == 'Especialista') {
+        this.user.speciality.forEach((especialidad:any) =>{
+          if(!this.especialidades.includes(especialidad)){
+            let espec:Especialidad = new Especialidad();
+            espec.especialidad = especialidad;
+            this.specialitySvc.createElement(espec);
+          }
+        })
+      }
       this.authSvc.getCurrentUser().then((response: any) => {
       this.user.id = response.uid;
       this.userSvc.createElement(
@@ -99,6 +120,20 @@ export class RegisterComponent implements OnInit {
     this.user.profile = 'Especialista'
     this.formRegister.addControl('imageOne', new FormControl('',[Validators.required]));
     this.formRegister.addControl('speciality' , new FormControl('',[Validators.required]))
+  }
+
+  administrador(){
+    if (this.user.profile == 'Paciente') {
+      this.formRegister.removeControl('obraSocial');
+      this.formRegister.removeControl('imageOne');
+      this.formRegister.removeControl('imageTwo');
+    }
+    if(this.user.profile == 'Especialista'){
+      this.formRegister.removeControl('imageOne');
+      this.formRegister.removeControl('speciality');
+    }
+    this.user.profile = 'Administrador'
+    this.formRegister.addControl('imageOne', new FormControl('',[Validators.required]));
   }
   paciente(){
     if(this.user.profile == 'Especialista'){

@@ -1,0 +1,24 @@
+<div class="col-md-12" *ngFor="let especialidad of especialidades" >
+    <button type="button" class="btn btn-primary" (click)="seleccionarEspecialidad(especialidad)"> 
+      <img src="{{especialidad}}.jpg" alt="" srcset="" class="img">
+    </button>
+    <br>
+    {{especialidad}}
+    <br>
+</div>
+
+<div class="col-md-12" *ngFor="let especialista of specialists" ><br>
+  {{especialista.fistName}} {{especialista.lastName}}
+  <br>
+    <button type="button" class="btn btn-primary"  (click)="seleccionarEspecialista(especialista)"> 
+      <img src="{{especialista.imageOne}}" alt="" srcset="" class="img" style="height: 100px;">
+    </button>
+    
+</div>
+
+<div class="col-md-12" *ngFor="let day of especialistaSeleccionado.days" ><br>
+    <button type="button" class="btn btn-primary" (click)="seleccionarDia(day)">{{day}} </button>
+</div>
+<div class="col-md-12" *ngFor="let horario of horarios" ><br>
+  <button type="button" class="btn btn-primary">{{horario }}</button>
+</div>

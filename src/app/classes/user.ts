@@ -14,6 +14,8 @@ export class User {
     public profileImgTwo:any;
     public imageOne:string = ''
     public imageTwo:string = ''
+    public isDelete:boolean = false;
+    public days:Array<string> = []
 
     constructor(){
 

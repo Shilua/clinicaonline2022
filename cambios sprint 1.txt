@@ -6,3 +6,19 @@ registro de usuarios
 al registrar se van a ver dos imagenes, botones rectangulares, un especialista o un paciente 
 cuando se presione muestra el form de el que corresponde
 
+cambios sprint 2
+
+sacar turnos
+para el usuario muestra las especialidades con los botones que representan las especialidades abajo el nombre,
+
+aparecen los profecionales con botones rectangulares con la imagen del profecional con el nombre arriba
+
+aparecen los dias (9 de septiembre) botones rectangulares
+
+aparecen botones con las hh:mm solo los disponibles
+
+* Sacar un turno
+ - Comienza mostrando las ESPECIALIDADES en botones con la imagen de la especialidad, en caso de no tener muesra imagen por default. Deben ser botones rectangulares con el nombre de la especialidad debajo.
+ - Una vez seleccionada mostrará los PROFESIONALES, en botones con la imagen de perfil de cada profesional y su nombre arriba de la foto. Estos botones deben ser rectangulares.
+- Una vez seleccionado el profesional, aparecerán los días con turnos disponibles para ese PROFESIONAL. Estos botones deben ser rectangulares. Formato (09 de Septiembre).
+ - Seleccionado el día mostrará los horarios disponibles. Estos botones deben ser rectangulares. Formato (13:15).

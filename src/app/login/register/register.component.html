@@ -9,6 +9,11 @@
         <img class="mb-4" src="../../../assets/doctor-ge7cc28a68_640.png" alt="" width="250" height="250" (click)="especialista()">
         <h3>Especialista</h3>
       </div>
+      <div class="col-4" *ngIf="profile == 'Administrador'">
+        <img class="mb-4" src="../../../assets/3372216.jpg" alt="" width="250" height="250" (click)="administrador()">
+        <h3>Administrador</h3>
+      </div>
+
     </div>
     <div class="col-md-4 " >
       <h4>Seleccione un perfil para ver el formulario</h4>
@@ -95,6 +100,15 @@
           <input type="file" class="form-control" [(ngModel)]="imgTwoUrl" (change)="handleSecondImg($event)" id="imgTwo"
           formControlName="imageTwo"
           />
+          </div>
+        </div >
+
+        <div *ngIf="this.user.profile == 'Administrador'">
+          <div class="form-group" >
+            <label for="imgOne">Foto de perfil</label>
+            <input type="file" class="form-control" [(ngModel)]="imgOneUrl" (change)="handleFirstImg($event)" id="imgOne"
+            formControlName="imageOne"
+            />
           </div>
         </div>
         

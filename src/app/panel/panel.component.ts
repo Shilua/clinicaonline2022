@@ -10,16 +10,19 @@ import { UserService } from '../services/user.service';
 export class PanelComponent implements OnInit {
   public especialistas:Array<User> = new Array<User>();
   public pacientes:Array<User> = new Array<User>();
+  public administradores:Array<User> = new Array<User>();
+
 
   
   constructor(private userSrv:UserService) {
     this.busqueda('Especialista', this.especialistas);
     this.busqueda('Paciente', this.pacientes);
+    this.busqueda('Administrador', this.administradores);
 
   }
 
   busqueda(filtro:string, usuarios:Array<User>):void{
-    this.userSrv.getElements().where('profile', '==', filtro).get().then(
+    this.userSrv.getElements().where('profile', '==', filtro).where('isDelete','==', false).get().then(
       snapshot => {
         snapshot.docs.map(
           (element:any) => {
