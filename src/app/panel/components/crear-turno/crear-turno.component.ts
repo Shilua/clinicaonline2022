@@ -21,6 +21,8 @@ export class CrearTurnoComponent implements OnInit {
 
   especialidades:Array<string> = new Array<string>();
   especialidadSeleccionada:string = '';
+  diaSeleccionado:string = '';
+  fechaTurno:Date = new Date();
   especialistaSeleccionado:User = new User();
   horarios:Array<string> = new Array<string>();
   constructor(
@@ -52,6 +54,7 @@ export class CrearTurnoComponent implements OnInit {
   }
 
   seleccionarDia(dia:string){
+    this.diaSeleccionado = dia;
     let hora = 8;
     for (let index = 0; index < 22; index++) {
       
@@ -64,9 +67,17 @@ export class CrearTurnoComponent implements OnInit {
     }
   }
 
+  seleccionarHora(hora:string){
+    let dateTime = [];
+    dateTime = hora.split(':');
+    let date:Date = new Date(2022,11,2,Number(dateTime[0]), Number(dateTime[1]));
+    console.log(date);
+  }
+
   seleccionarEspecialista(especialista:User){
     this.especialistaSeleccionado = especialista;
-    console.log(this.especialistaSeleccionado.days)
+    console.log(
+        this.especialistaSeleccionado.days)
     this.turnoSvc.getElements().where('especialistaEmail', '==', especialista.email).get().then(
       snapshot =>{
         snapshot.docs.map(

@@ -1,26 +1,31 @@
 <div class="text-center">
-  <div class="col-md-12" *ngFor="let especialidad of especialidades" >
-    <button type="button" class="btn btn-primary" (click)="seleccionarEspecialidad(especialidad)"> 
-      <img src="../../../../assets/{{especialidad}}.jpg" alt="" srcset="" class="img" style="height: 100px;">
-    </button>
-    <br>
-    {{especialidad}}
-    <br>
-</div>
-
-<div class="col-md-12" *ngFor="let especialista of specialists" ><br>
-  {{especialista.fistName}} {{especialista.lastName}}
-  <br>
-    <button type="button" class="btn btn-primary"  (click)="seleccionarEspecialista(especialista)"> 
-      <img src="{{especialista.imageOne}}" alt="" srcset="" class="img" style="height: 100px;">
-    </button>
-    
-</div>
-
-<div class="col-md-12" *ngFor="let day of especialistaSeleccionado.days" ><br>
-    <button type="button" class="btn btn-primary" (click)="seleccionarDia(day)">{{day}} </button>
-</div>
-<div class="col-md-12" *ngFor="let horario of horarios" ><br>
-  <button type="button" class="btn btn-primary">{{horario }}</button>
-</div>
+  <div class="row">
+    <div class="col-md-2" *ngFor="let especialidad of especialidades" >
+      <button type="button" class="btn btn-primary" (click)="seleccionarEspecialidad(especialidad)"> 
+        <img src="../../../../assets/{{especialidad}}.jpg" alt="" srcset="" class="img" style="height: 100px;">
+      </button>
+      <br>
+      {{especialidad}}
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2" *ngFor="let especialista of specialists" ><br>
+      {{especialista.fistName}} {{especialista.lastName}}
+      <br>
+        <button type="button" class="btn btn-primary"  (click)="seleccionarEspecialista(especialista)"> 
+          <img src="{{especialista.imageOne}}" alt="" srcset="" class="img" style="height: 100px;">
+        </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1" *ngFor="let day of especialistaSeleccionado.days" ><br>
+      <button type="button" class="btn btn-primary" (click)="seleccionarDia(day)">{{day}} </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1" *ngFor="let horario of horarios" ><br>
+      <button type="button" class="btn btn-primary" (click)="seleccionarHora(horario)">{{horario }}</button>
+    </div>
+  </div>
 </div>
