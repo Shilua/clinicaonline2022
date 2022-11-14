@@ -48,12 +48,12 @@ export class CrearTurnoComponent implements OnInit {
   seleccionarEspecialidad(especialidad:string){
     this.especialidadSeleccionada = especialidad;
     this.busqueda(this.especialidadSeleccionada);
-    let date = new Date();
-    let day = date.getDay();
-    console.log(day)
   }
 
   seleccionarDia(dia:string){
+    let diaDeHoy:Date = new Date();
+    let diaNumber = diaDeHoy.getDate();
+
     this.diaSeleccionado = dia;
     let hora = 8;
     for (let index = 0; index < 22; index++) {
@@ -76,6 +76,7 @@ export class CrearTurnoComponent implements OnInit {
 
   seleccionarEspecialista(especialista:User){
     this.especialistaSeleccionado = especialista;
+    this.devolverFecha(especialista);
     console.log(
         this.especialistaSeleccionado.days)
     this.turnoSvc.getElements().where('especialistaEmail', '==', especialista.email).get().then(
@@ -99,6 +100,38 @@ export class CrearTurnoComponent implements OnInit {
       }
     )
   }
+
+  devolverFecha(especialista:User){
+    let dias = {
+      1 : 'Lunes',
+      2 : 'Martes',
+      3 : 'Miercoles',
+      4 : 'Jueves',
+      5 : 'Viernes',
+      6 : 'Sabado',
+      7 : 'Domingo',
+    }
+
+    let aDay:Date = new Date();
+    let dates:Array<Date> = new Array<Date>();
+
+    for (let index = 0; index < 15; index++) {
+      aDay.setDate(aDay.getDate() + index +1)
+      dates.push(aDay);
+    }
+
+    console.log(dates);
+
+    dates.filter(function(date){
+      console.log(especialista.days)
+      if(especialista.days.has(date.getDay())){
+        return date
+      }
+      return undefined
+    })
+    console.log(dates);
+  }
+
   busqueda( especialidad:string):void{
     let usuarios:Array<User> = new Array<User>();
     this.userSvc.getElements()
