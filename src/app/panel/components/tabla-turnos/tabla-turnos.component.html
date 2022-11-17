@@ -16,15 +16,104 @@
             <td>{{turno.paciente}}</td>
             <td>{{turno.especialista}}</td>
             <td>{{turno.especialidad}}</td>
-            <td>{{turno.fecha}}</td>
+            <td>{{turno.fecha }}</td>
             <td>{{turno.estado}}</td>
-            <td>
-                <button class="btn btn-primary"> acciones</button>
+            <td *ngIf="user.profile == 'Paciente' else especialista">
+                <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
+                        (click)="enviarAccion('cancelarTurno', turno)"
+                        >
+                        Cancelar turno
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.resenia != ''"
+                        (click)="enviarAccion('verResenia',turno)"
+                        >
+                        Ver reseña
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.resenia != '' && turno.estado == 'Realizado'"
+                        (click)="enviarAccion('completarEncuesta',turno)"
+                        >
+                        Completar encuesta
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.estado == 'Realizado' && turno.puntuacion != 0 "
+                        (click)="enviarAccion('calificar',turno)"
+                    >
+                        Calificar atención
+                    </button>
+                  </div>
             </td>
-            <ng-template #paciente>
-                <td>no hay acciones</td>
+            <ng-template #especialista>
+                <td *ngIf="user.profile == 'Especialista' else admin">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
+                        (click)="enviarAccion('cancelarTurno', turno)"
+                        >
+                        Cancelar turno
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.estado != 'Aceptado' && turno.estado != 'Cancelado' && turno.estado != 'Realizado'"
+                        (click)="enviarAccion('rechazarTurno',turno)"
+                        >
+                        rechazar turno
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.estado != 'Realizado' && turno.estado != 'Rechazado' && turno.estado != 'Cancelado'"
+                        (click)="enviarAccion('aceptarTurno',turno)"
+                        >
+                        Aceptar turno
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.estado == 'Aceptado'"
+                        (click)="enviarAccion('finalizarTurno',turno)"
+                    >
+                        Finalizar turno 
+                    </button>
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-dark" 
+                        *ngIf="turno.resenia != '' && turno.estado == 'Realizado'"
+                        (click)="enviarAccion('verResenia',turno)"
+                    >
+                        Ver Reseña
+                    </button>
+                  </div>
+                </td>
             </ng-template>
-
+            <ng-template #admin>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                        <button 
+                            type="button" 
+                            class="btn btn-outline-dark" 
+                            *ngIf="turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
+                            (click)="enviarAccion('cancelarTurno', turno)"
+                            >
+                            Cancelar turno
+                        </button>
+                    </div>
+                </td>
+            </ng-template>
         </tr>
         
     </tbody>

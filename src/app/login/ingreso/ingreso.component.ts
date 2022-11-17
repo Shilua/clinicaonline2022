@@ -45,7 +45,6 @@ export class IngresoComponent implements OnInit, OnDestroy  {
               img => {
                 userAux.profileImgOne = img;
                 this.users.push(userAux);
-                console.log(this.users);
               }
             )
           }
@@ -71,7 +70,6 @@ export class IngresoComponent implements OnInit, OnDestroy  {
             response => {
               response.docs.map((element:any)=>{
                 let data = element.data();
-                console.log(data);
                 if (data.profile == 'Especialista' && !data.isActive) {
                   this.toastService.show(
                     'Su usuario no esta activado', 
@@ -103,12 +101,22 @@ export class IngresoComponent implements OnInit, OnDestroy  {
                       this.user.imageTwo = response;
                     }
                   );
-                }else {
+                }else if(this.user.profile == 'Especialista'){
                   this.user.speciality = data.speciality;
+                  this.user.days = new Map(Object.entries(data.days));
+                  this.user.especialistaDays = new Map(Object.entries(data.especialistaDays));
+                  this.user.especialistaHoras = new Map(Object.entries(data.especialistaHoras));
                 }
 
                 this.authServ.saveUser(this.user);
-                this.router.navigate(['/panel']);
+                if (this.user.profile == 'Administrador') {
+                  this.router.navigate(['/panel/admin/users']);
+                } else if(this.user.profile == 'Especialista'){
+                  this.router.navigate(['panel/especialista/turnos-especialista']);
+                }else {
+                  this.router.navigate(['panel/paciente/turnos-paciente'])
+                }
+                
               })
             }
           ) 

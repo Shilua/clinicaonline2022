@@ -49,6 +49,5 @@ export class AuthService {
   saveUser(anUser:User){
     this.anUser = anUser;
     this.profile = this.anUser.profile;
-    console.log(this.anUser)
   }
 }

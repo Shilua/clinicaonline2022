@@ -15,7 +15,10 @@ export class User {
     public imageOne:string = ''
     public imageTwo:string = ''
     public isDelete:boolean = false;
-    public days:Map<number,string> = new Map<number,string>();
+    public days:Map<any,any> = new Map<any,any>();
+    public especialistaDays:Map<any,any> = new Map<any,any>();
+    public especialistaHoras:Map<any,any> = new Map<any,any>();
+
 
     constructor(){
 

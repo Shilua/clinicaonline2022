@@ -1,0 +1,80 @@
+<app-tabla-turnos [turnos]="turnos" (selectedAcction)="handleAction($event)" ></app-tabla-turnos>
+<ng-template #cancelarModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Cancelar Turno</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<div class="col-md-12">
+            <label for="recomendacion">¿Por que motivo cancela el turno?</label>
+            <textarea 
+                class="form-control" placeholder="Leave a comment here" 
+                id="recomendacion" style="height: 100px" 
+                [(ngModel)]="turno.cancelado"
+            >
+            </textarea>
+	    </div>
+	</div>
+	<div class="modal-footer">
+        <button class="btn btn-primary" (click)="cancelarTurno()">Canelar turno</button>
+	</div>
+</ng-template>
+
+<ng-template #finalizarModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Finalizar Turno</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<div class="col-md-12">
+            <label for="recomendacion">Cargue reseña</label>
+            <textarea 
+                class="form-control" placeholder="Leave a comment here" 
+                id="recomendacion" style="height: 100px" 
+                [(ngModel)]="turno.resenia"
+            >
+            </textarea>
+	    </div>
+        <div class="col-md-12">
+            <label for="recomendacion">Cargue diagnostico</label>
+            <textarea 
+                class="form-control" placeholder="Leave a comment here" 
+                id="recomendacion" style="height: 100px" 
+                [(ngModel)]="turno.diagnostico"
+            >
+            </textarea>
+	    </div>
+		<div class="col-md-12">
+			<p>Cargue historia clinica</p>
+			<div *ngFor="let campo of turno.historiaClinica.keys() ">
+				<label>Cargue {{campo}}</label>
+				<input [(ngModel)]="historiaClinica[campo]"type="text" class="form-control" >
+			</div>
+		</div>
+		<div class="row" *ngFor="let nuevoCampo of nuevosCampos">
+			<div class="col-md-6">
+				<label for="">nombre campo</label>
+				<input type="text" class="form-control" >
+			</div>
+			<div class="col-md-6">
+				<label for="">valor campo</label>
+				<input type="text" class="form-control" >
+			</div>	
+		</div>
+		
+	</div>
+	<div class="modal-footer">
+        <button class="btn btn-primary" (click)="finalizarTurno()">Canelar turno</button>
+	</div>
+</ng-template>
+<ng-template #resenia let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Reseña</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>{{turno.resenia}}</p>
+	</div>
+	<div class="modal-footer">
+	</div>
+</ng-template>

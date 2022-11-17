@@ -1,0 +1,101 @@
+<app-tabla-turnos [turnos]="turnos" (selectedAcction)="handleAction($event)"></app-tabla-turnos>
+<ng-template #resenia let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Reseña</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>{{turno.resenia}}</p>
+	</div>
+	<div class="modal-footer">
+	</div>
+</ng-template>
+<ng-template #calificarModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Califiar</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<fieldset class="row mb-3">
+            <legend class="col-form-label">Califique del uno al cinco nuestra pagina</legend>
+            <div class="col-sm-12">
+                <div class="form-check form-check-inline">
+                    <input 
+                        class="form-check-input" type="radio" 
+                        name="puntuacion" formControlName="puntuacion" 
+                        id="inlineRadio1" value=1
+                        (change)="changeRadioValue($event)"
+                    >
+                    <label class="form-check-label" for="inlineRadio1">1</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input 
+                        class="form-check-input" type="radio" 
+                        name="puntuacion" formControlName="puntuacion" 
+                        id="inlineRadio2" value=2
+                        (change)="changeRadioValue($event)"
+                    >
+                    <label class="form-check-label" for="inlineRadio2">2</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input 
+                        class="form-check-input" type="radio" 
+                        name="puntuacion" formControlName="puntuacion" 
+                        id="inlineRadio3" value=3
+                        (change)="changeRadioValue($event)"
+                    >
+                    <label class="form-check-label" for="inlineRadio3">3</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input 
+                        class="form-check-input" type="radio" 
+                        name="puntuacion" formControlName="puntuacion" 
+                        id="inlineRadio4" value=4
+                        (change)="changeRadioValue($event)"
+                    >
+                    <label class="form-check-label" for="inlineRadio4">4</label>
+                  </div><div class="form-check form-check-inline">
+                    <input 
+                        class="form-check-input" type="radio" 
+                        name="puntuacion" formControlName="puntuacion" 
+                        id="inlineRadio5" value=5
+                        (change)="changeRadioValue($event)"
+                    >
+                    <label class="form-check-label" for="inlineRadio5">5</label>
+                  </div>
+            </div>
+          </fieldset>
+	</div>
+	<div class="modal-footer">
+        <button class="btn btn-primary" (click)="enviarCalificacion()"> enviar calificacion</button>
+	</div>
+</ng-template>
+<ng-template #encuestaModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Encuesta</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <div class="class col-md-12">
+            <input 
+                type="checkbox" class="form-check-input" 
+                id="checkbox" [(ngModel)]="encuesta.recomienda"
+            >
+            <label for="checkbox" class="form-label">
+                ¿recomendaria esta pagina? (marque el check si su respuesta es si)
+            </label>
+        </div>
+        <div class="col-md-12">
+            <label for="recomendacion">¿Que mejorarias a la web?</label>
+            <textarea 
+                class="form-control" placeholder="Leave a comment here" 
+                id="recomendacion" style="height: 100px" 
+                [(ngModel)]="encuesta.opinion"
+            >
+            </textarea>
+	    </div>
+    </div>
+	<div class="modal-footer">
+        <button class="btn btn-primary" (click)="enviarEncuesta()">Enviar encuesta</button>
+	</div>
+</ng-template>

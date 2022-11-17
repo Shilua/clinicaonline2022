@@ -15,16 +15,18 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./crear-turno.component.css']
 })
 export class CrearTurnoComponent implements OnInit {
-  //formRegister : FormGroup;
   specialists:Array<User> = new Array<User>();
+  pacientes:Array<User> = new Array<User>();
   turnos:Array<Turno> = new Array<Turno>();
-
+  loginUser:User = new User();
+  pacienteSeleccionado:User = new User();
   especialidades:Array<string> = new Array<string>();
   especialidadSeleccionada:string = '';
-  diaSeleccionado:string = '';
+  diaSeleccionado:Date = new Date();
   fechaTurno:Date = new Date();
   especialistaSeleccionado:User = new User();
   horarios:Array<string> = new Array<string>();
+  fechas:Array<Date> = new Array<Date>();
   constructor(
     private authSvc:AuthService, 
     private userSvc:UserService,
@@ -33,6 +35,7 @@ export class CrearTurnoComponent implements OnInit {
     private router: Router,
     private toastService:ToastService
   ) {
+    this.loginUser = this.authSvc.anUser;
     this.specialitySvc.getElements().where('isDelete', '==', false).get().then(
       snapshot => {
         snapshot.docs.map((element:any)=>{
@@ -41,6 +44,35 @@ export class CrearTurnoComponent implements OnInit {
         })
       }
     )
+    if (this.loginUser.profile == 'Administrador') {
+      this.userSvc.getElements().where('isDelete',  '==' , false)
+      .where('profile', '==', 'Paciente')
+      .get().then(
+        snapshot => {
+          snapshot.docs.map((element:any)=>{
+            let paciente:User = new User();
+            let data = element.data();
+            paciente.id = element.id;
+            paciente.fistName = data.fistName;
+            paciente.lastName = data.lastName;
+            paciente.age = data.age;
+            paciente.dni = data.dni;
+            paciente.email = data.email;
+            paciente.password = data.password;
+            paciente.profile = data.profile;
+            paciente.profileImgOne = data.profileImgOne;
+            paciente.isActive = data.isActive;
+            //paciente.days = new Map(Object.entries(data.days));
+            this.userSvc.getProfilePhoto(data.profileImgOne).then(
+              img => {
+                paciente.imageOne = img;
+              }
+            )
+            this.pacientes.push(paciente);
+          })
+        }
+      )
+    }
    }
 
   ngOnInit(): void {
@@ -50,35 +82,44 @@ export class CrearTurnoComponent implements OnInit {
     this.busqueda(this.especialidadSeleccionada);
   }
 
-  seleccionarDia(dia:string){
-    let diaDeHoy:Date = new Date();
-    let diaNumber = diaDeHoy.getDate();
-
+  seleccionarDia(dia:Date){
     this.diaSeleccionado = dia;
+    this.horarios = []
     let hora = 8;
-    for (let index = 0; index < 22; index++) {
-      
+    let tiempos = this.diaSeleccionado.getDay() >= 6 ? 12 : 22;
+    let horariosTomados:Array<string> = new Array<string>();
+    this.turnos.forEach(turno=>{
+      let dia  = this.diaSeleccionado.getDay();
+      if (turno.fecha.getDay() == dia) {
+        let hora = turno.fecha.getHours()+3;
+        horariosTomados.push(hora+ ':' + turno.fecha.getMinutes()+0);
+      }
+    })
+    console.log(horariosTomados)
+    for (let index = 0; index < tiempos; index++) {    
       let minutos = index%2 ? '30': '00'
       let horario = hora+ ':' + minutos;
+      if (horariosTomados.includes(horario)) {
+        continue;
+      }
       if(index%2) hora = hora + 1;
-      
       this.horarios.push(horario)
-      
     }
   }
 
   seleccionarHora(hora:string){
     let dateTime = [];
     dateTime = hora.split(':');
-    let date:Date = new Date(2022,11,2,Number(dateTime[0]), Number(dateTime[1]));
-    console.log(date);
+    this.diaSeleccionado.setHours(Number(dateTime[0]));
+    this.diaSeleccionado.setMinutes(Number(dateTime[1]));
+    this.diaSeleccionado.setSeconds(0);
   }
-
+  seleccionarPaciente(paciente:User){
+    this.pacienteSeleccionado = paciente;
+  }
   seleccionarEspecialista(especialista:User){
     this.especialistaSeleccionado = especialista;
     this.devolverFecha(especialista);
-    console.log(
-        this.especialistaSeleccionado.days)
     this.turnoSvc.getElements().where('especialistaEmail', '==', especialista.email).get().then(
       snapshot =>{
         snapshot.docs.map(
@@ -90,7 +131,7 @@ export class CrearTurnoComponent implements OnInit {
             turno.especialista =data.especialista;
             turno.especialistaEmail = data.especialistaEmail;
             turno.estado = data.estado;
-            turno.fecha = data.fecha;
+            turno.fecha = new Date(data.fecha);
             turno.isDelete = data.isDelete;
             turno.paciente = data.paciente;
             turno.pacienteEmail = turno.pacienteEmail;
@@ -102,34 +143,42 @@ export class CrearTurnoComponent implements OnInit {
   }
 
   devolverFecha(especialista:User){
-    let dias = {
-      1 : 'Lunes',
-      2 : 'Martes',
-      3 : 'Miercoles',
-      4 : 'Jueves',
-      5 : 'Viernes',
-      6 : 'Sabado',
-      7 : 'Domingo',
-    }
-
-    let aDay:Date = new Date();
+    
     let dates:Array<Date> = new Array<Date>();
 
     for (let index = 0; index < 15; index++) {
+      let aDay:Date = new Date();
       aDay.setDate(aDay.getDate() + index +1)
       dates.push(aDay);
     }
 
-    console.log(dates);
-
-    dates.filter(function(date){
-      console.log(especialista.days)
-      if(especialista.days.has(date.getDay())){
+    this.fechas = dates.filter(function(date){
+      if(especialista.days.has(String(date.getDay()))){
         return date
       }
-      return undefined
+      return
     })
-    console.log(dates);
+  }
+
+  crearTurno(){
+    let turno:Turno = new Turno();
+    //console.log(turno.historiaClinica.);
+    turno.especialidad = this.especialidadSeleccionada;
+    turno.especialista = this.especialistaSeleccionado.fistName + ' ' + this.especialistaSeleccionado.lastName;
+    turno.especialistaEmail  = this.especialistaSeleccionado.email;
+    
+    turno.estado = 'Pendiente';
+    turno.fecha = this.diaSeleccionado;
+    turno.isDelete = false;
+    if (this.loginUser.profile == 'Administrador') {
+      turno.paciente = this.pacienteSeleccionado.fistName+ ' ' + this.pacienteSeleccionado.lastName;
+      turno.pacienteEmail = this.pacienteSeleccionado.email
+    }else {
+      turno.paciente = this.authSvc.anUser.fistName + ' ' + this.authSvc.anUser.lastName;
+      turno.pacienteEmail = this.authSvc.anUser.email;
+    }
+    
+    this.turnoSvc.createElement(turno);
   }
 
   busqueda( especialidad:string):void{
@@ -154,7 +203,7 @@ export class CrearTurnoComponent implements OnInit {
             user.profile = data.profile;
             user.profileImgOne = data.profileImgOne;
             user.isActive = data.isActive;
-            user.days = data.days;
+            user.days = new Map(Object.entries(data.days));
             this.userSvc.getProfilePhoto(data.profileImgOne).then(
               img => {
                 user.imageOne = img;

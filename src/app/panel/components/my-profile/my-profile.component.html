@@ -1,0 +1,182 @@
+<div class="row">
+    <div class="col-8 offset-2">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Nombre Completo</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{loginUser.fistName}} {{loginUser.lastName}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{loginUser.email}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">D.N.I.</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{loginUser.dni}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Edad</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{loginUser.age}}</p>
+              </div>
+            </div>
+            <hr>
+            <div *ngIf="loginUser.profile == 'Paciente' else especialista">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Obra social</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{loginUser.obraSocial}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Imagen uno</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <img src="{{loginUser.imageOne}}" alt="" srcset="" style="height: 250px;">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Imagen dos</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <img src="{{loginUser.imageOne}}" alt="" srcset="" style="height: 250px;">
+                    </div>
+                </div>
+            </div>
+            
+            <ng-template #especialista>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Especialidades</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{loginUser.speciality}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Imagen uno</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <img src="{{loginUser.imageOne}}" alt="" srcset="" style="height: 250px;">
+                    </div>
+                </div>
+                <hr>
+                <div class="row" *ngFor="let especialidad of loginUser.speciality let j = index " [attr.data-index]= j>
+                    <div class="col-sm-12">
+                        <h4>
+                           Especialidad: {{especialidad}} 
+                        </h4>
+                        
+                    </div>
+                    <div class="col-sm-3">
+                        Dias de trabajo
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="btn-group me-2" role="group" aria-label="First group">
+                            <div *ngFor="let value of daysBySpeciality.get(especialidad); let i = index " [attr.data-index]= i>
+                                <button class="btn"
+                                    [ngClass]="{'btn-primary': value, 'btn-outline-primary': !value}"
+                                    (click)="seleccionarDia(especialidad,i)"
+                                > 
+                                <p *ngIf="i == 0 else martes" >Lunes</p>
+                                <ng-template #martes>
+                                    <p *ngIf="i == 1 else miercoles">Martes</p>
+                                </ng-template>
+                                <ng-template #miercoles>
+                                    <p *ngIf="i == 2 else jueves">Miercoles</p>
+                                </ng-template>
+                                <ng-template #jueves>
+                                    <p *ngIf="i == 3 else viernes">Jueves</p>
+                                </ng-template>
+                                <ng-template #viernes>
+                                    <p *ngIf="i == 4 else sabado">Viernes</p>
+                                </ng-template>
+                                <ng-template #sabado>
+                                    <p >Sabado</p>
+                                </ng-template>
+                            </button>
+                            </div>
+                          </div>
+                    </div>
+                    <hr>
+                    <div class="col-sm-12">
+                        horarios de trabajo
+                    </div>
+                    <hr>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            
+                            <div class="col-sm-6">
+                                <p>Lunes a viernes</p>
+                                <div class="btn-group me-2" role="group" aria-label="First group">
+                                    <label for="desde">Desde</label>
+                                    <input 
+                                      placeholder="8" type="number" 
+                                      class="form-control" id="desde"
+                                      min="8" max="19" [(ngModel)]="horarios[j].desde"
+                                      />
+                                      <label for="hasta">hasta</label>
+                                      <input 
+                                        placeholder="19" type="number" 
+                                        class="form-control" id="hasta"
+                                        min="8" max="19" [(ngModel)]="horarios[j].hasta"
+                                        />
+                                  </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>Sabado</p>
+                                <div class="btn-group me-2" role="group" aria-label="First group">
+                                    <label for="desde">Desde: </label>
+                                    <input 
+                                      placeholder="8" type="number" 
+                                      class="form-control" id="desde"
+                                      min="8" max="19" [(ngModel)]="horarios[j+1].desde"
+                                      />
+                                      <label for="hasta">hasta: </label>
+                                      <input 
+                                        placeholder="14" type="number" 
+                                        class="form-control" id="hasta"
+                                        min="8" max="14" [(ngModel)]="horarios[j+1].hasta"
+                                        />
+                                  </div>
+                            </div>
+                            <hr>
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <button class="btn btn-primary" (click)="actualizarHorarios(especialidad,j)">Actualizar horarios</button>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </ng-template>
+          </div>
+        </div>
+</div>
