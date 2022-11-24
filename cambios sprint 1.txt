@@ -37,3 +37,7 @@ Sección usuarios	"En la sección usuarios, solamente para el perfil Administrad
 usuarios."	Mostrar los usuarios con un favbutton redondo , imagen y nombre.Al seleccionarlo descarga los datos de que turnos tomo y con quien
 Mi perfil	"Para los usuarios paciente, un pdf con la historia clínica. El PDF tiene que tener
 logo de la clínica, título del informe y fecha de emisión."	Poder bajar Todas las atenciones que realice segun una ESPECIALIDAD
+
+* Gráficos
+- Usar la librería ChartJS
+- Cantidad de turnos por especialidad en gráfico de líneas

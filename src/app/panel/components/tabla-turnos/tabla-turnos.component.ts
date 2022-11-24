@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./tabla-turnos.component.css']
 })
 export class TablaTurnosComponent implements OnInit {
+  public variable:string = ''
   @Input() turnos:Array<Turno> = new Array<Turno>();
   @Output() selectedAcction: EventEmitter<any> = new EventEmitter<any>()
   user:User = new User();

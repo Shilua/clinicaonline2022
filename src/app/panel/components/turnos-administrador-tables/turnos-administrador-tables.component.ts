@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Turno } from 'src/app/classes/turno';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class TurnosAdministradorTablesComponent implements OnInit {
     private turnoSrv:TurnosService,
     private authSrv:AuthService,
     private modalService: NgbModal,
+    private toastService:ToastService,
   ) { 
     this.turnoSrv.getElements()
         .where('isDelete', '==', false)
@@ -67,6 +69,10 @@ export class TurnosAdministradorTablesComponent implements OnInit {
    cancelarTurno(){
     this.turno.estado = 'Cancelado';
     this.turnoSrv.updateElement(this.turno);
+    this.toastService.show(
+      'Turno cancelado', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
    }
 
    private getDismissReason(reason: any): string {

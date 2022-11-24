@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   formRegister : FormGroup;
   profile:String = '';
   especialidades:Array<string> = new Array<string>();
+  captcha:boolean  = false;
 
   constructor(
     private authSvc:AuthService, 
@@ -60,34 +61,42 @@ export class RegisterComponent implements OnInit {
   }
 
   async onRegister(){
-    this.authSvc.onRegister(this.user).then(response => {
-      if (this.user.profile == 'Especialista') {
-        this.user.speciality.forEach((especialidad:any) =>{
-          if(!this.especialidades.includes(especialidad)){
-            let espec:Especialidad = new Especialidad();
-            espec.especialidad = especialidad;
-            this.specialitySvc.createElement(espec);
-          }
-        })
-      }
-      this.authSvc.getCurrentUser().then((response: any) => {
-      this.user.id = response.uid;
-      this.userSvc.createElement(
-        this.user,this.imageOne, this.imageTwo
-      );
-      this.authSvc.getCurrentUser().then((u:any) => u.sendEmailVerification()).then(
-        () => {
-          this.toastService.show(
-            'Se ha registrado correctamente, se le envio un correo electronico para verificarlo,' 
-            + 'si es Especialista debe esperar que lo autorice un administrador', 
-            {classname : 'bg-success text-light', delay:3000}
-          )
+    if (this.captcha) {
+      this.authSvc.onRegister(this.user).then(response => {
+        if (this.user.profile == 'Especialista') {
+          this.user.speciality.forEach((especialidad:any) =>{
+            if(!this.especialidades.includes(especialidad)){
+              let espec:Especialidad = new Especialidad();
+              espec.especialidad = especialidad;
+              this.specialitySvc.createElement(espec);
+            }
+          })
         }
-      );
-      //this.router.navigate(['/principal']);
-    });
-
-  }).catch(error => this.mensaje = error);
+        this.authSvc.getCurrentUser().then((response: any) => {
+        this.user.id = response.uid;
+        this.userSvc.createElement(
+          this.user,this.imageOne, this.imageTwo
+        );
+        this.authSvc.getCurrentUser().then((u:any) => u.sendEmailVerification()).then(
+          () => {
+            this.toastService.show(
+              'Se ha registrado correctamente, se le envio un correo electronico para verificarlo,' 
+              + 'si es Especialista debe esperar que lo autorice un administrador', 
+              {classname : 'bg-success text-light', delay:3000}
+            )
+          }
+        );
+        //this.router.navigate(['/principal']);
+      });
+  
+    }).catch(error => this.mensaje = error);
+    }else {
+      this.toastService.show(
+        'El captcha no es correcto', 
+        {classname : 'bg-danger text-light', delay:3000}
+      )
+    }
+    
   }
  handleFirstImg(files: any) {
     this.imageOne = files.target.files[0];
@@ -95,7 +104,9 @@ export class RegisterComponent implements OnInit {
   handleSecondImg(files: any) {
     this.imageTwo = files.target.files[0];
   }
-
+  handleValue(bool:boolean){
+    this.captcha = bool
+  }
   /*handleProfile(profile:any){
     this.user.profile = profile;
     console.log(this.user.profile);
@@ -107,7 +118,7 @@ export class RegisterComponent implements OnInit {
   }
 
   login(){
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login/login']);
   }
 
   especialista(){

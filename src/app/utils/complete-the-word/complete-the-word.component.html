@@ -1,0 +1,15 @@
+    <div class="container">
+  <div class="contain">
+      <div class="titulo"><span class="titulo">Completa la palabra para finalizar el registro</span></div>
+      <div id="pal" class="palabra">{{palabra}}</div>
+      <div class="ingreso" id="ingreso">
+          <input type="text" id="completa" maxlength="1" autocomplete="off" spellcheck="false" placeholder="Ingrese la letra..." [(ngModel)]="letra" (keyup)="comprobar()">
+      </div>
+      <div class="botones">
+          <button (click)="empezar()" class="btn btn-primary">Otra palabra</button>
+          <button (click)="cancel()" class="btn btn-primary">Cancelar</button>
+          <button (click)="skip()" class="btn btn-primary">Saltear Captcha</button>
+      </div>
+      <!--div class="errorCom" id="errorCom">Letra incorrecta</div-->
+  </div>
+</div>

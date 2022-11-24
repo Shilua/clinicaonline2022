@@ -4,13 +4,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastContainerComponent } from './toast-container/toast-container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { CompleteTheWordComponent } from './complete-the-word/complete-the-word.component';
 
 
 
 @NgModule({
   declarations: [
     ToastContainerComponent,
-    NavBarComponent
+    NavBarComponent,
+    CompleteTheWordComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   ],
   exports : [
     ToastContainerComponent,
-    NavBarComponent
+    NavBarComponent,
+    CompleteTheWordComponent
   ]
 })
 export class UtilsModule { }

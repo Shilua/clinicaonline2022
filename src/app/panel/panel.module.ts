@@ -18,6 +18,12 @@ import { TurnosPacienteTablesComponent } from './components/turnos-paciente-tabl
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TurnosAdministradorTablesComponent } from './components/turnos-administrador-tables/turnos-administrador-tables.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { FiltroPipe } from '../pipes/filtro.pipe';
+import { PacientesComponent } from './components/pacientes/pacientes.component';
+import { VistaPacientesComponent } from './components/vista-pacientes/vista-pacientes.component';
+import { TurnosPacientesPipe } from '../pipes/turnos-pacientes.pipe';
+import { ChartsComponent } from './components/charts/charts.component';
+import '@fortawesome/fontawesome-free/js/all.js';
 
 registerLocaleData(localeEs);
 @NgModule({
@@ -33,7 +39,12 @@ registerLocaleData(localeEs);
     TurnosEspecialistaTablesComponent,
     TurnosPacienteTablesComponent,
     TurnosAdministradorTablesComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    FiltroPipe,
+    TurnosPacientesPipe,
+    PacientesComponent,
+    VistaPacientesComponent,
+    ChartsComponent
   ],
   imports: [
     CommonModule,

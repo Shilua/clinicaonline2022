@@ -6,6 +6,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TemplateRef, ViewChild } from '@angular/core';
 import { Encuesta } from 'src/app/classes/encuesta';
 import { EncuestasService } from 'src/app/services/encuestas.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-turnos-paciente-tables',
@@ -27,7 +28,8 @@ export class TurnosPacienteTablesComponent implements OnInit {
     private turnoSrv:TurnosService,
     private authSrv:AuthService,
     private modalService: NgbModal,
-    private encuestaSrv:EncuestasService
+    private encuestaSrv:EncuestasService,
+    private toastService:ToastService,
   ) {
       this.turnoSrv.getElements()
         .where('pacienteEmail', '==', this.authSrv.anUser.email)
@@ -85,10 +87,18 @@ export class TurnosPacienteTablesComponent implements OnInit {
     this.turno  =  data;
     this.turno.estado = 'Cancelado';
     this.turnoSrv.updateElement(this.turno);
+    this.toastService.show(
+      'Se ha cancelado el turno', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
    }
 
   enviarCalificacion(){
     this.turnoSrv.updateElement(this.turno);
+    this.toastService.show(
+      'Se ha enviado la calificacion correctamente', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
   }
 
   enviarEncuesta(){
@@ -97,6 +107,10 @@ export class TurnosPacienteTablesComponent implements OnInit {
     this.encuesta.paciente = this.turno.paciente;
     this.encuesta.pacienteEmail = this.turno.pacienteEmail;
     this.encuestaSrv.createElement(this.encuesta);
+    this.toastService.show(
+      'Se ha ha enviado la encuesta correctamente', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
   }
 
    verResenia(data:any){

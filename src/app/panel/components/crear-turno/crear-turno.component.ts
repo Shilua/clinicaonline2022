@@ -156,7 +156,7 @@ export class CrearTurnoComponent implements OnInit {
       if(especialista.days.has(String(date.getDay()))){
         return date
       }
-      return
+      return null
     })
   }
 
@@ -179,6 +179,11 @@ export class CrearTurnoComponent implements OnInit {
     }
     
     this.turnoSvc.createElement(turno);
+
+    this.toastService.show(
+      'Turno creado', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
   }
 
   busqueda( especialidad:string):void{

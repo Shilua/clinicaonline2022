@@ -4,6 +4,7 @@ import { AdminGuard } from '../guards/admin.guard';
 import { EspecialistaGuard } from '../guards/especialista.guard';
 import { PacienteGuard } from '../guards/paciente.guard';
 import { RegisterComponent } from '../login/register/register.component';
+import { ChartsComponent } from './components/charts/charts.component';
 import { CrearTurnoComponent } from './components/crear-turno/crear-turno.component';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
@@ -13,6 +14,7 @@ import { TurnosAdministradorTablesComponent } from './components/turnos-administ
 import { TurnosEspecialistaTablesComponent } from './components/turnos-especialista-tables/turnos-especialista-tables.component';
 import { TurnosPacienteTablesComponent } from './components/turnos-paciente-tables/turnos-paciente-tables.component';
 import { UsersTablesComponent } from './components/users-tables/users-tables.component';
+import { VistaPacientesComponent } from './components/vista-pacientes/vista-pacientes.component';
 import { PanelComponent } from './panel.component';
 
 const routes: Routes = [
@@ -22,13 +24,15 @@ const routes: Routes = [
         {path: 'users', component: UsersTablesComponent},
         {path: 'crear-usuario', component: RegisterComponent},
         {path: 'crear-turno', component: CrearTurnoComponent},
-        {path: 'turnos', component:TurnosAdministradorTablesComponent}
+        {path: 'turnos', component:TurnosAdministradorTablesComponent},
+        {path: 'graficos', component:ChartsComponent}
       ], canActivate:[AdminGuard]
     },
     {
       path: 'especialista', component: PanelDoctorComponent, children: [
         {path: 'turnos-especialista', component: TurnosEspecialistaTablesComponent},
-        {path:'perfil', component:MyProfileComponent}
+        {path:'perfil', component:MyProfileComponent},
+        {path:'pacientes', component:VistaPacientesComponent}
       ], canActivate: [EspecialistaGuard]
     },
     {

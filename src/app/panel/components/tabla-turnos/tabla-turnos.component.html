@@ -1,4 +1,4 @@
-
+<input type="text" name="" [(ngModel)]="variable">
 <table class="table table-info table-hover table-striped">
     <thead>
         <tr>
@@ -12,7 +12,7 @@
 
     </thead>
     <tbody >
-        <tr *ngFor="let turno of turnos">
+        <tr *ngFor="let turno of turnos |   filtro : variable" >
             <td>{{turno.paciente}}</td>
             <td>{{turno.especialista}}</td>
             <td>{{turno.especialidad}}</td>

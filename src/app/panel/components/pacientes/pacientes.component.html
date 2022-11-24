@@ -1,0 +1,14 @@
+<div class="row ">
+    <div class="col-md-4" *ngFor="let paciente of pacientes">
+      <div class="card" style="width: 18rem;">
+        <img src="{{paciente.imageOne}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{paciente.fistName}} {{paciente.lastName}}</h5>
+        <div *ngFor="let turno of turnos | turnosPacientes : paciente.email" >
+            {{turno.fecha}}
+        </div>
+        <button class="btn btn-primary" (click)="createPdf(paciente)">Ver historia clinica</button>
+      </div>
+    </div>
+  </div>
+</div>

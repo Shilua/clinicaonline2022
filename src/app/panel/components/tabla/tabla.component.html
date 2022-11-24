@@ -1,5 +1,5 @@
 <button class="btn btn-primary" (click)="exportexcel()"> descargar </button>
-<table class="table table-info table-hover table-striped" id="table">
+<table class="table table-info table-hover table-striped scale-up-ver-bottom " id="table">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -27,6 +27,13 @@
                 <button class="btn btn-primary" (click)="activar(usuario)"> Activar</button>
             </td>
             <ng-template #paciente>
+                <td *ngIf="usuario.profile == 'Paciente'; else administrador">
+                    <button type="button" class="btn btn-primary btn-floating" (click)="descargarHistoria(usuario)">
+                        <i class="fa-solid fa-download"></i>
+                      </button>
+                </td>
+            </ng-template>
+            <ng-template #administrador>
                 <td>no hay acciones</td>
             </ng-template>
 

@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Turno } from 'src/app/classes/turno';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class TurnosEspecialistaTablesComponent implements OnInit {
     private turnoSrv:TurnosService,
     private authSrv:AuthService,
     private modalService: NgbModal,
+    private toastService:ToastService,
   ) {
     this.turnoSrv.getElements()
         .where('especialistaEmail', '==', this.authSrv.anUser.email)
@@ -86,6 +88,10 @@ export class TurnosEspecialistaTablesComponent implements OnInit {
     this.turno = data;
     this.turno.estado = 'Rechazado';
     this.turnoSrv.updateElement(this.turno);
+    this.toastService.show(
+      'Se rechazo un turno', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
    }
 
    finalizarTurno(){
@@ -96,12 +102,20 @@ export class TurnosEspecialistaTablesComponent implements OnInit {
       this.turno.historiaClinica.set(element[0],element[1]);
     });
     this.turnoSrv.updateElement(this.turno);
+    this.toastService.show(
+      'Se finalizo un turno y se cargo reseña e historia clinica', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
    }
 
    aceptarTurno(data:any){
     this.turno = data;
     this.turno.estado = 'Aceptado';
     this.turnoSrv.updateElement(this.turno);
+    this.toastService.show(
+      'Se acepto un turno', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
    }
 
    mostrarFinalizarModal(data:any){
@@ -131,6 +145,10 @@ export class TurnosEspecialistaTablesComponent implements OnInit {
    cancelarTurno(){
     this.turno.estado = 'Cancelado';
     this.turnoSrv.updateElement(this.turno);
+    this.toastService.show(
+      'Se creo un turno', 
+      {classname : 'bg-success text-light', delay:3000}
+    )
    }
 
    private getDismissReason(reason: any): string {
