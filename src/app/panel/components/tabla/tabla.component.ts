@@ -55,8 +55,12 @@ export class TablaComponent implements OnInit {
           data.push('Fecha de carga: ' + date.toLocaleDateString('es'));
           data.push('Especialidad: '+ turno.especialidad)
           data.push('Especialista: ' + turno.especialista)
-          historiasClinicas.push(turno.historiaClinica)
+          let mapa = new Map(Object.entries(turno.historiaClinica));
+          historiasClinicas.push()
           console.log(data)
+          mapa.forEach((value, key) =>{
+            data.push(key+ ': '+value);
+          })
           historiasClinicas.push(data)
         })
         historiasClinicas.forEach(historiaClinica => {

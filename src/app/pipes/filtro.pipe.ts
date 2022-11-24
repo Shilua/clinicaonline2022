@@ -16,7 +16,6 @@ export class FiltroPipe implements PipeTransform {
     data.paciente.includes(filtro) ||
     data.especialista.includes(filtro) ||
     data.estado.includes(filtro) ||
-    data.puntuacion.incluses(filtro) ||
     data.historiaClinica.forEach((element:any) => {
      element.includes(filtro)
     })
