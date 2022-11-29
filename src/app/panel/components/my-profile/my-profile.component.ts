@@ -26,7 +26,7 @@ export class MyProfileComponent implements OnInit {
   ) { 
     //this.daysBySpeciality.set('test', this.arrayLunes);
     this.loginUser = this.authSvc.anUser;
-  
+    console.log(this.loginUser)
     if (this.loginUser.profile == 'Especialista') {
       
       this.loginUser.speciality.forEach(speciality => {
@@ -36,6 +36,7 @@ export class MyProfileComponent implements OnInit {
         let dias:Array<Boolean> = new Array<Boolean>();
         dias.push(false,false,false,false,false,false);
         days= this.loginUser.especialistaDays.get(speciality);
+        console.log(days)
         days.forEach(day=> {
           if (day == 'Lunes') {
             

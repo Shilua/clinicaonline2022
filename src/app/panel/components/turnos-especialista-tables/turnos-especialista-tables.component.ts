@@ -4,6 +4,8 @@ import { Turno } from 'src/app/classes/turno';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { TurnosService } from 'src/app/services/turnos.service';
+import {KeyValue} from '@angular/common';
+
 
 @Component({
   selector: 'app-turnos-especialista-tables',
@@ -20,6 +22,7 @@ export class TurnosEspecialistaTablesComponent implements OnInit {
   @ViewChild('finalizarModal') private finalizarModal!: TemplateRef<any>;
   @ViewChild('resenia') private resenia!: TemplateRef<any>;
   historiaClinica:Array<any> = new Array<any>();
+  campos:any[] = []
 
   constructor(
     private turnoSrv:TurnosService,

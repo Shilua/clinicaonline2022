@@ -106,6 +106,7 @@ export class IngresoComponent implements OnInit, OnDestroy  {
                   this.user.days = new Map(Object.entries(data.days));
                   this.user.especialistaDays = new Map(Object.entries(data.especialistaDays));
                   this.user.especialistaHoras = new Map(Object.entries(data.especialistaHoras));
+                  console.log(this.user)
                 }
 
                 this.authServ.saveUser(this.user);
