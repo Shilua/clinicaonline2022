@@ -1,7 +1,10 @@
-<div class="row">
-    <div class="col-sm-12">
+<div class="col-sm-12">
         <button class="btn btn-primary" (click)="actualizar()">Actualizar Graficos</button>
+        <button class="btn btn-primary" (click)="descargarPdf()">Descargar Graficos</button>
+
     </div>
+<div class="row" #graficos>
+    
     <div class="col-sm-6">
         <h2>Cantidad de turnos por especialidad</h2>
         <canvas id="turnosPorEspecialidad"></canvas>

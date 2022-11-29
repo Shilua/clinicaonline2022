@@ -1,9 +1,11 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Chart, registerables} from 'node_modules/chart.js'
 import { EspecialidadesService } from 'src/app/services/especialidades.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import { UserService } from 'src/app/services/user.service';
 Chart.register(...registerables);
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf';
 @Component({
   selector: 'app-charts',
   templateUrl: './charts.component.html',
@@ -16,6 +18,7 @@ export class ChartsComponent implements OnInit {
   turnosSolicitados:Array<any> = new Array<any>()
   turnosFinalizados:Array<any> = new Array<any>()
   today:Date = new Date()
+  @ViewChild('graficos') screen:ElementRef
   constructor(
     private turnosSvc:TurnosService,
     private espSvc:EspecialidadesService,
@@ -85,6 +88,19 @@ export class ChartsComponent implements OnInit {
       this.RenderChart(this.especialistas,this.cantidadTurnos,'bar','turnosPorEspecialista','# turnos por especialista')
       this.RenderChart(this.especialistas,this.turnosFinalizados,'bar','turnosRealizados','# turnos solicitados')
       this.RenderChart(this.especialistas,this.turnosSolicitados,'bar','turnosSolicitados','# turnos realizados')
+    }
+    descargarPdf(){
+      html2canvas(this.screen.nativeElement).then(canvas => {
+        let altura = 200;
+        let PDF = new jsPDF('p', 'mm','a4');
+        let anchura = (canvas.height *altura)/ canvas.width;
+        const ARCHIVO = canvas.toDataURL('image/png');
+        let position = 0;
+
+        PDF.addImage(ARCHIVO,'PNG', 0, position,altura,anchura)
+        PDF.save('graficos.pdf')
+
+      });
     }
     RenderChart(labeldata:any,maindata:any,type:any,id:any,label:any) {
       const myChart = new Chart(id, {
