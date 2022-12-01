@@ -14,7 +14,7 @@ export class PanelAdminComponent implements OnInit {
 
   
   constructor( private router:Router, private translate:TranslateService) {
-
+    this.translate.use('en');
   }
   changeLang(lang: string) {
     this.translate.use(lang);
