@@ -151,7 +151,9 @@ export class TurnosPacienteTablesComponent implements OnInit {
   changeRadioValue(e:any){
     this.turno.puntuacion = e.target.value
   }
-
+  changeRadioValueEncuesta(e:any){
+    this.encuesta.puntuacion = e.target.value
+  }
   ngOnInit(): void {
   }
 

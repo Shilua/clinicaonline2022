@@ -7,4 +7,7 @@ export class Encuesta {
     public pacienteEmail = '';
     public recomienda:boolean = false;
     public opinion:string = ''
+    public rango:number = 0
+    public puntuacion:number = 0
+    public buttonValue:string = ''
 }

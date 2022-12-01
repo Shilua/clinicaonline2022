@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Turno } from 'src/app/classes/turno';
 import { AuthService } from 'src/app/services/auth.service';
 import { TurnosService } from 'src/app/services/turnos.service';
@@ -12,9 +13,10 @@ import { TurnosService } from 'src/app/services/turnos.service';
 export class PanelPacienteComponent implements OnInit {
   turnos:Array<Turno> = new Array<Turno>();
   constructor(
-    private router:Router
+    private router:Router,
+    private translate:TranslateService
   ) {
-      
+    this.translate.use('es');
    }
 
    navigate(link:string){
