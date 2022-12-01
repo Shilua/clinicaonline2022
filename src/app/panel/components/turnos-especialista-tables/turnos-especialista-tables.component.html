@@ -49,19 +49,19 @@
 			<p>Cargue historia clinica</p>
 			<div *ngFor="let campo of turno.historiaClinica | keyvalue">
 				<label>Cargue {{campo.key}}</label>
-				<input [(ngModel)]="historiaClinica[campo.value]"type="text" class="form-control" >
+				<input [(ngModel)]="historiaClinica[campo.key]"type="text" class="form-control" >
 			</div>
 		</div>
-		<div class="row" *ngFor="let nuevoCampo of nuevosCampos">
-			<div class="col-md-6">
-				<label for="">nombre campo</label>
-				<input type="text" class="form-control" >
-			</div>
-			<div class="col-md-6">
-				<label for="">valor campo</label>
-				<input type="text" class="form-control" >
-			</div>	
+		<div class="row showInputField">
+			
 		</div>
+		<button class="btn btn-primary" (click)="agregarCampo()" [disabled]="maxCampos"> probar</button>
+		<div class="row showInputFieldSpecific">
+			
+			
+		</div>
+		<button class="btn btn-primary" [disabled]="disabledButton" (click)="agregarCamposEspecificos()"> probar</button>
+
 		
 	</div>
 	<div class="modal-footer">

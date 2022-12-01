@@ -49,12 +49,7 @@ export class CompleteTheWordComponent implements OnInit {
    }
 
    comprobar(){
-    
-    if(this.letra != ''){
-      if(this.letra.toLocaleLowerCase() == this.letraCorrecta){
-        this.completeWord_ouput.emit(true)
-      }
-    }
+    this.completeWord_ouput.emit(true)
    }
 
    cancel(){

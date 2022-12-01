@@ -2,12 +2,12 @@
 <table class="table table-info table-hover table-striped scale-up-ver-bottom">
     <thead>
         <tr>
-            <th>Paciente</th>
-            <th>Especialista</th>
-            <th>Especialidad</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+            <th>{{'PATIENT' | translate}}</th>
+            <th>{{'SPECIALIST' | translate}}</th>
+            <th>{{'SPECIALTY' | translate}}</th>
+            <th>{{'DATE' | translate}}</th>
+            <th>{{'STATUS' | translate}}</th>
+            <th>{{'ACTIONS' | translate}}</th>
         </tr>
 
     </thead>
@@ -26,7 +26,7 @@
                         *ngIf="turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
                         (click)="enviarAccion('cancelarTurno', turno)"
                         >
-                        Cancelar turno
+                        {{'CANCELTURN'| translate}}
                     </button>
                     <button 
                         type="button" 
@@ -34,7 +34,7 @@
                         *ngIf="turno.resenia != ''"
                         (click)="enviarAccion('verResenia',turno)"
                         >
-                        Ver reseña
+                        {{'SEEREVIEW'| translate}}
                     </button>
                     <button 
                         type="button" 
@@ -42,15 +42,15 @@
                         *ngIf="turno.resenia != '' && turno.estado == 'Realizado'"
                         (click)="enviarAccion('completarEncuesta',turno)"
                         >
-                        Completar encuesta
+                        {{'COMPLETESURVEY'| translate}}
                     </button>
                     <button 
                         type="button" 
                         class="btn btn-outline-dark" 
-                        *ngIf="turno.estado == 'Realizado' && turno.puntuacion != 0 "
+                        *ngIf="turno.estado == 'Realizado' && turno.puntuacion == 0 "
                         (click)="enviarAccion('calificar',turno)"
                     >
-                        Calificar atención
+                    {{'QUALIFYATTENTION'| translate}}
                     </button>
                   </div>
             </td>
@@ -63,7 +63,7 @@
                         *ngIf="turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
                         (click)="enviarAccion('cancelarTurno', turno)"
                         >
-                        Cancelar turno
+                        {{'CANCELTURN'| translate}}
                     </button>
                     <button 
                         type="button" 
@@ -71,7 +71,7 @@
                         *ngIf="turno.estado != 'Aceptado' && turno.estado != 'Cancelado' && turno.estado != 'Realizado'"
                         (click)="enviarAccion('rechazarTurno',turno)"
                         >
-                        rechazar turno
+                        {{'REJECTTURN'| translate}}
                     </button>
                     <button 
                         type="button" 
@@ -79,7 +79,7 @@
                         *ngIf="turno.estado != 'Realizado' && turno.estado != 'Rechazado' && turno.estado != 'Cancelado'"
                         (click)="enviarAccion('aceptarTurno',turno)"
                         >
-                        Aceptar turno
+                        {{'ACCEPTTURN'| translate}}
                     </button>
                     <button 
                         type="button" 
@@ -87,7 +87,7 @@
                         *ngIf="turno.estado == 'Aceptado'"
                         (click)="enviarAccion('finalizarTurno',turno)"
                     >
-                        Finalizar turno 
+                    {{'ENDTURN'| translate}}
                     </button>
                     <button 
                         type="button" 
@@ -95,7 +95,7 @@
                         *ngIf="turno.resenia != '' && turno.estado == 'Realizado'"
                         (click)="enviarAccion('verResenia',turno)"
                     >
-                        Ver Reseña
+                    {{'SEEREVIEW'| translate}}
                     </button>
                   </div>
                 </td>
@@ -109,7 +109,7 @@
                             *ngIf="turno.estado != 'Realizado' && turno.estado != 'Cancelado'"
                             (click)="enviarAccion('cancelarTurno', turno)"
                             >
-                            Cancelar turno
+                            {{'CANCELTURN'| translate}}
                         </button>
                     </div>
                 </td>

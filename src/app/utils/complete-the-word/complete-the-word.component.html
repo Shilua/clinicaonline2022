@@ -3,7 +3,11 @@
       <div class="titulo"><span class="titulo">Completa la palabra para finalizar el registro</span></div>
       <div id="pal" class="palabra">{{palabra}}</div>
       <div class="ingreso" id="ingreso">
-          <input type="text" id="completa" maxlength="1" autocomplete="off" spellcheck="false" placeholder="Ingrese la letra..." [(ngModel)]="letra" (keyup)="comprobar()">
+          <input type="text" id="completa" 
+            maxlength="1" autocomplete="off" 
+            spellcheck="false" placeholder="Ingrese la letra..." 
+            appCaptcha [text]="letraCorrecta" (validEvent)="comprobar()"
+            >
       </div>
       <div class="botones">
           <button (click)="empezar()" class="btn btn-primary">Otra palabra</button>

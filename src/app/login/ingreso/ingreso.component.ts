@@ -1,4 +1,5 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,17 +14,23 @@ import { UserService } from 'src/app/services/user.service';
 export class IngresoComponent implements OnInit, OnDestroy  {
 
   user:User = new User();
-  
+  langs: Array<string> = new Array<string>();
+
   spinner:Boolean = false;
   imgs:any = new Map();
   users:Array<User> = new Array<User>();
   
   constructor(
+      private translate: TranslateService,
       private authServ:AuthService,
       private userServ:UserService,
       private router:Router,
       private toastService:ToastService,        
     ) {
+      this.translate.setDefaultLang('en');
+      this.translate.use('en');
+      this.translate.addLangs(['en', 'es', 'pr']);
+      this.langs = this.translate.getLangs();
       setTimeout(this.spinnerTime, 2000)
       this.userServ.getElements().where('email','in' ,
       [
@@ -59,6 +66,9 @@ export class IngresoComponent implements OnInit, OnDestroy  {
   ngOnInit(): void {
   }
 
+  changeLang(lang: string) {
+    this.translate.use(lang);
+  }
   ngOnDestroy(): void {
     this.toastService.clear();
   }

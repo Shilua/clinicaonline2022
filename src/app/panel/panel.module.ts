@@ -24,6 +24,7 @@ import { VistaPacientesComponent } from './components/vista-pacientes/vista-paci
 import { TurnosPacientesPipe } from '../pipes/turnos-pacientes.pipe';
 import { ChartsComponent } from './components/charts/charts.component';
 import '@fortawesome/fontawesome-free/js/all.js';
+import { TranslateModule } from '@ngx-translate/core';
 
 registerLocaleData(localeEs);
 @NgModule({
@@ -52,7 +53,8 @@ registerLocaleData(localeEs);
     UtilsModule,
     LoginModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'es'} // Añades esta línea en los providers

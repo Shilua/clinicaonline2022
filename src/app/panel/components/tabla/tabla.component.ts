@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-free/js/all.js';
 import { TurnosService } from 'src/app/services/turnos.service';
 import pdfMake from 'pdfmake/build/pdfMake';
 import pfdFonts from 'pdfmake/build/vfs_fonts';
+import { TranslateService } from '@ngx-translate/core';
 pdfMake.vfs = pfdFonts.pdfMake.vfs;
 @Component({
   selector: 'app-tabla',
@@ -20,7 +21,8 @@ export class TablaComponent implements OnInit {
   constructor(
     private userServ:UserService,
     private toastService:ToastService,
-    private turnosSvc:TurnosService
+    private turnosSvc:TurnosService,
+    private translate:TranslateService
     ) { }
 
   activar(user:User){

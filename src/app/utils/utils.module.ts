@@ -5,6 +5,7 @@ import { ToastContainerComponent } from './toast-container/toast-container.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CompleteTheWordComponent } from './complete-the-word/complete-the-word.component';
+import { CaptchaDirective } from './directives/captcha.directive';
 
 
 
@@ -12,7 +13,8 @@ import { CompleteTheWordComponent } from './complete-the-word/complete-the-word.
   declarations: [
     ToastContainerComponent,
     NavBarComponent,
-    CompleteTheWordComponent
+    CompleteTheWordComponent,
+    CaptchaDirective
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { CompleteTheWordComponent } from './complete-the-word/complete-the-word.
   exports : [
     ToastContainerComponent,
     NavBarComponent,
-    CompleteTheWordComponent
+    CompleteTheWordComponent,
+    CaptchaDirective
   ]
 })
 export class UtilsModule { }

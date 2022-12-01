@@ -17,7 +17,13 @@ export class TurnosEspecialistaTablesComponent implements OnInit {
   turnos:Array<Turno> = new Array<Turno>();
   turno:Turno = new Turno();
   closeResult:string = '';
-  nuevosCampos:Array<any> = new Array<any>(0,0,0);
+  nuevosCampos:number = 0
+  maxCampos:Boolean = false;
+  disabledButton:Boolean = false;
+  nombresCampos = ['ew','','']
+  valoresCampos = ['','','']
+  test:string = ''
+
   @ViewChild('cancelarModal') private cancelarModal!: TemplateRef<any>;
   @ViewChild('finalizarModal') private finalizarModal!: TemplateRef<any>;
   @ViewChild('resenia') private resenia!: TemplateRef<any>;
@@ -96,14 +102,99 @@ export class TurnosEspecialistaTablesComponent implements OnInit {
       {classname : 'bg-success text-light', delay:3000}
     )
    }
+   agregarCampo(){
+    let row = document.createElement('div');  
+      row.className = 'row';
+      row.innerHTML = `
+      <div class="col-md-6">
+        <label for="">nombre campo</label>
+          <input type="text" class="form-control" id="nombreCampo` + this.nuevosCampos + `" >
+      </div>
+      <div class="col-md-6">
+        <label for="">valor campo</label>
+        <input type="text" class="form-control " id="valorCampo` + this.nuevosCampos + `">
+      </div>	`;
+      document.querySelector('.showInputField').appendChild(row);
+      if (this.nuevosCampos == 2) {
+        this.maxCampos = true
+      }
+      
+      this.nuevosCampos++
+   }
+
+   agregarCamposEspecificos(){
+    let row = document.createElement('div');  
+      row.className = 'row';
+      row.innerHTML = `
+      <div class="col-md-12">
+				<label for="">nombre campo</label>
+        		<input type="text" class="form-control" id="nombreSlider">
+			</div>
+			<div class="col-md-12">
+				<label for="valorSlider" class="form-label">rango de 0 a 100</label>
+				<input type="range" class="form-range" min="0" max="100" step="1" id="valorSlider" value=0 >	
+			</div>
+			<div class="col-md-6">
+				<label for="">nombre campo</label>
+        		<input type="text" class="form-control" id="nombreNumber">
+			</div>
+			<div class="col-md-6">
+      <label for="">Valor numerico</label>
+				<input type="number" class="form-control" id="valorNumber">
+			</div>
+			<div class="col-md-6">
+				<label for="">nombre campo</label>
+        		<input type="text" class="form-control" id="nombreCheck">
+			</div>
+			<div class="col-md-6 ">
+				<div class="form-check form-switch form-check-reverse" style="padding-top: 25px;">
+					<input class="form-check-input" type="checkbox" id="valorCheck">
+					<label class="form-check-label" for="valorCheck">No o Si</label>
+				</div>
+			</div>`;
+      document.querySelector('.showInputFieldSpecific').appendChild(row);
+      this.disabledButton = true;
+   }
 
    finalizarTurno(){
     this.turno.estado = 'Realizado';
-    console.log(this.historiaClinica)
     const obj = Object.entries(this.historiaClinica); 
     obj.forEach(element => {
       this.turno.historiaClinica.set(element[0],element[1]);
     });
+    for (let index = 0; index < this.nuevosCampos; index++) {
+      
+      let campo = (<HTMLInputElement>document.getElementById('nombreCampo'+index))
+      let valor = (<HTMLInputElement>document.getElementById('valorCampo'+index))
+      console.log(campo)
+      if(campo.value != ''){
+        this.turno.historiaClinica.set(campo.value,valor.value);
+      }
+    }
+    let nombreSlider = (<HTMLInputElement>document.getElementById('nombreSlider'))
+    if (nombreSlider) {
+      let valorSlider = (<HTMLInputElement>document.getElementById('valorSlider'))
+      console.log(valorSlider)
+      this.turno.historiaClinica.set(nombreSlider.value,valorSlider.value);
+    }
+    let nombreNumber = (<HTMLInputElement>document.getElementById('nombreNumber'))
+    if (nombreNumber) {
+      let valorNumber = (<HTMLInputElement>document.getElementById('valorNumber'))
+      this.turno.historiaClinica.set(nombreNumber.value,valorNumber.value);
+    }
+
+    let nombreCheck = (<HTMLInputElement>document.getElementById('nombreCheck'))
+    if (nombreCheck) {
+      let valorCheck = (<HTMLInputElement>document.getElementById('valorCheck'))
+      let valor = 'no'
+      if (valorCheck.value = 'on') {
+        valor = 'si'
+      }
+      this.turno.historiaClinica.set(nombreCheck.value,valor);
+    }
+
+
+    console.log(this.turno);
     this.turnoSrv.updateElement(this.turno);
     this.toastService.show(
       'Se finalizo un turno y se cargo reseña e historia clinica', 
