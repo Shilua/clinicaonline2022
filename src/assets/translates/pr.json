@@ -27,5 +27,6 @@
     "QUALIFYATTENTION": "Qualificar a atenção",
     "REJECTTURN": "Recusar Turno",
     "ACCEPTTURN": "Aceitar Turno",
-    "ENDTURN": "turno final"
+    "ENDTURN": "turno final",
+    "NOACTIONS": "Sem ações"
 }

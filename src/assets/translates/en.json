@@ -27,6 +27,7 @@
     "QUALIFYATTENTION": "Qualify Attention",
     "REJECTTURN": "Reject Turn",
     "ACCEPTTURN": "Accept Turn",
-    "ENDTURN": "End Turn"
+    "ENDTURN": "End Turn",
+    "NOACTIONS": "No Actions"
 
 }

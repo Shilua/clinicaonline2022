@@ -27,5 +27,6 @@
     "QUALIFYATTENTION": "Calificar Atencion",
     "REJECTTURN": "Rechazar Turno",
     "ACCEPTTURN": "Aceptar Turno",
-    "ENDTURN": "Finalizar Turno"
+    "ENDTURN": "Finalizar Turno",
+    "NOACTIONS": "No hay acciones"
 }
